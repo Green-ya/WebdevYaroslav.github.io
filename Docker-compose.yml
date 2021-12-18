@@ -1,0 +1,26 @@
+version: "3.8"
+
+services:
+
+  web_server:
+    build:
+      context: .
+      args:
+        buildno: 1
+    container_name: web_server
+    restart: always
+    environment:
+      TZ: "Europe/Moscow"
+    ports:
+      - 82:80
+    volumes:
+      - ./html/:/usr/share/nginx/html/
+
+  maria_db:
+    image: mariadb
+    container_name: maria_db
+    restart: always
+    environment:
+      TZ: "Europe/Moscow"
+    volumes:
+      - /var/lib/docker/volumes/mariadb/_data/:/var/lib/mysql
